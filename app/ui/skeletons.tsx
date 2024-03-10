@@ -102,7 +102,11 @@ export default function DashboardSkeleton() {
   );
 }
 
-export function TableRowSkeleton() {
+interface RowProps {
+  actions?: boolean,
+}
+
+export function TableRowSkeleton({ actions=true}: RowProps) {
   return (
     <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
       {/* Customer Name and Image */}
@@ -129,17 +133,23 @@ export function TableRowSkeleton() {
         <div className="h-6 w-16 rounded bg-gray-100"></div>
       </td>
       {/* Actions */}
-      <td className="whitespace-nowrap py-3 pl-6 pr-3">
-        <div className="flex justify-end gap-3">
-          <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
-          <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
-        </div>
-      </td>
+      {
+        actions 
+        ? 
+        <td className="whitespace-nowrap py-3 pl-6 pr-3">
+          <div className="flex justify-end gap-3">
+            <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
+            <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
+          </div>
+        </td>
+        :
+        null
+      }
     </tr>
   );
 }
 
-export function InvoicesMobileSkeleton() {
+export function MobileSkeleton({ actions=true}: RowProps) {
   return (
     <div className="mb-2 w-full rounded-md bg-white p-4">
       <div className="flex items-center justify-between border-b border-gray-100 pb-8">
@@ -154,10 +164,16 @@ export function InvoicesMobileSkeleton() {
           <div className="h-6 w-16 rounded bg-gray-100"></div>
           <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
         </div>
-        <div className="flex justify-end gap-2">
-          <div className="h-10 w-10 rounded bg-gray-100"></div>
-          <div className="h-10 w-10 rounded bg-gray-100"></div>
-        </div>
+        {
+          actions 
+          ?
+          <div className="flex justify-end gap-2">
+            <div className="h-10 w-10 rounded bg-gray-100"></div>
+            <div className="h-10 w-10 rounded bg-gray-100"></div>
+          </div>
+          :
+          null
+        }
       </div>
     </div>
   );
@@ -169,12 +185,12 @@ export function InvoicesTableSkeleton() {
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
+            <MobileSkeleton />
+            <MobileSkeleton />
+            <MobileSkeleton />
+            <MobileSkeleton />
+            <MobileSkeleton />
+            <MobileSkeleton />
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
@@ -209,6 +225,53 @@ export function InvoicesTableSkeleton() {
               <TableRowSkeleton />
               <TableRowSkeleton />
               <TableRowSkeleton />
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const CustomersTableSkeleton = () => {
+  return (
+    <div className="mt-6 flow-root">
+      <div className="inline-block min-w-full align-middle">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          <div className="md:hidden">
+            <MobileSkeleton actions={false}/>
+            <MobileSkeleton actions={false}/>
+            <MobileSkeleton actions={false}/>
+            <MobileSkeleton actions={false}/>
+            <MobileSkeleton actions={false}/>
+          </div>
+          <table className="hidden min-w-full text-gray-900 md:table">
+            <thead className="rounded-lg text-left text-sm font-normal">
+              <tr>
+                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                  Name
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Email
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total Invoices
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total Pending
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Total Paid
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              <TableRowSkeleton actions={false}/>
+              <TableRowSkeleton actions={false}/>
+              <TableRowSkeleton actions={false}/>
+              <TableRowSkeleton actions={false}/>
+              <TableRowSkeleton actions={false}/>
+              <TableRowSkeleton actions={false}/>
             </tbody>
           </table>
         </div>
